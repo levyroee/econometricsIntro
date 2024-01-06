@@ -91,7 +91,7 @@ options(scipen=999)
 # Data downloaded here: https://public.opendatasoft.com/explore/dataset/airbnb-listings/export/?disjunctive.host_verifications&disjunctive.amenities&disjunctive.features
 #Airbnb_Raw <- read_delim("data/airbnb-listings.csv")
 #Airbnb <- AIRBNB %>% select(City, sqFt = `Square Feet`, Country, numReview = `Number of Reviews`,
-                            rating = `Review Scores Rating`, Price) 
+#                            rating = `Review Scores Rating`, Price) 
 #saveRDS(Airbnb, "data/airbnb.rds")
 
 
