@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.rtf
+*.ini
+data/humanDay/.DS_Store
+*.Rproj
