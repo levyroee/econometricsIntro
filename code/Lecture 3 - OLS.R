@@ -5,8 +5,9 @@ library(ggpmisc)
 
 rm(list=ls())
 
+set.seed(3000)
 
-beta_0 = 5000
+beta_0 = 2000
 beta_1 = 0.4
 
 # *************************************************************************
@@ -17,7 +18,7 @@ for (i in 1:2) {
   
   # Create data
   mpcData = data.frame( 
-    x = rnorm(40, 9000, 2000),
+    x = rnorm(40, 6000, 2000),
     e = rnorm(40, 0, 1000)
   )
   
@@ -35,8 +36,8 @@ for (i in 1:2) {
     geom_abline(intercept = beta_0, slope = beta_1, color = "red") + 
     geom_text(aes(x=6500, y=11000, label = paste0(expression(hat(beta)),"[0]==", round(obsIntercept))), parse = TRUE) +
     geom_text(aes(x=6500, y=11500, label = paste0(expression(hat(beta)),"[1]==", round(obsSlope,digits = 4))), parse = TRUE) +
-    scale_y_continuous(limits = c(5000,12000)) +
-    scale_x_continuous(limits = c(5000,12000)) +
+    scale_y_continuous(limits = c(0,12000)) +
+    scale_x_continuous(limits = c(0,12000)) +
     theme_classic() 
   
   ggsave(paste0("output/lecture3-ols/mpcResult", i, ".png"))
@@ -104,14 +105,14 @@ ggplot(Airbnb %>% filter(20<sqMt & sqMt<300, Country %in% c("United States", "Un
   geom_point(size = 0.5) + 
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
   theme_classic() 
-ggsave("output/lecture4-olsAssumptions/airbnbPoints.png", width = 16, height = 14, unit = "cm")
+ggsave("output/lecture3-ols/airbnbPoints.png", width = 16, height = 14, unit = "cm")
 
 ggplot(Airbnb %>% filter(20<sqMt & sqMt<300, Country %in% c("United States", "United Kingdom", "France", "Germany")), aes(x = sqMt, y=Price)) +
   geom_point(size = 0.5) + 
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
   theme_classic() +
   stat_poly_eq(use_label("eq"), color = "red")
-ggsave("output/lecture4-olsAssumptions/airbnbAll.png", width = 16, height = 14, unit = "cm")
+ggsave("output/lecture3-ols/airbnbAll.png", width = 16, height = 14, unit = "cm")
 
 
 ggplot(Airbnb %>% filter(20<sqMt & sqMt<300, Country %in% c("United States", "United Kingdom", "France", "Germany")), 
@@ -121,4 +122,4 @@ ggplot(Airbnb %>% filter(20<sqMt & sqMt<300, Country %in% c("United States", "Un
   theme_classic() +
   facet_wrap(~Country) +
   stat_poly_eq(use_label(c("eq")), color = "red")
-ggsave("output/lecture4-olsAssumptions/airbnbByCity.png", width = 16, height = 14, unit = "cm")
+ggsave("output/lecture3-ols/airbnbByCity.png", width = 16, height = 14, unit = "cm")
