@@ -5,7 +5,7 @@ library(ggpmisc)
 
 rm(list=ls())
 
-set.seed(3000)
+set.seed(2024)
 
 beta_0 = 2000
 beta_1 = 0.4
@@ -40,7 +40,7 @@ for (i in 1:2) {
     scale_x_continuous(limits = c(0,12000)) +
     theme_classic() 
   
-  ggsave(paste0("output/lecture3-ols/mpcResult", i, ".png"))
+  ggsave(paste0("output/lecture3-ols/mpcResult", i, ".png"), height = 15, width = 12, units = "cm")
 }
 
 
@@ -103,7 +103,6 @@ Airbnb <- Airbnb %>% mutate(sqMt = sqFt / 10.764)
 
 ggplot(Airbnb %>% filter(20<sqMt & sqMt<300, Country %in% c("United States", "United Kingdom", "France", "Germany")), aes(x = sqMt, y=Price)) +
   geom_point(size = 0.5) + 
-  geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
   theme_classic() 
 ggsave("output/lecture3-ols/airbnbPoints.png", width = 16, height = 14, unit = "cm")
 
