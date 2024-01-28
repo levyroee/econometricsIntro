@@ -90,10 +90,20 @@ write.csv(mpcSmall, "output/lecture3-ols/mpcSmallTable.csv")
 options(scipen=999)
 
 # Data downloaded here: https://public.opendatasoft.com/explore/dataset/airbnb-listings/export/?disjunctive.host_verifications&disjunctive.amenities&disjunctive.features
-#Airbnb_Raw <- read_delim("data/airbnb-listings.csv")
-#Airbnb <- AIRBNB %>% select(City, sqFt = `Square Feet`, Country, numReview = `Number of Reviews`,
-#                            rating = `Review Scores Rating`, Price) 
-#saveRDS(Airbnb, "data/airbnb.rds")
+Airbnb_Raw <- readr::read_delim("data/airbnb-listings.csv")
+Airbnb <- Airbnb_Raw %>% select(City, sqFt = `Square Feet`, Country, 
+                                numReview = `Number of Reviews`,
+                                price = Price,
+                                guests = `Guests Included`,
+                                reviewRating = `Review Scores Rating`,
+                                reviewLocation = `Review Scores Location`,
+                                reviewClean = `Review Scores Cleanliness`,
+                                reviewComm = `Review Scores Communication`,
+                                responseRate = `Host Response Rate`,
+                                bedrooms = Bedrooms,
+                                accommodates = Accommodates,
+                                cleaningFee = `Cleaning Fee`) 
+saveRDS(Airbnb, "data/airbnb.rds")
 
 
 Airbnb <- readRDS("data/airbnb.rds")
