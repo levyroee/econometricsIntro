@@ -23,4 +23,3 @@ ggplot(NBA, aes(x = Age, y=PTS)) +
   stat_poly_eq(formula = y ~ poly(x,2, raw = TRUE), use_label(c("eq")), size=8) + 
   theme_classic(base_size = 15)
 ggsave("output/Lecture9-multipleRegressions/ageSqPts.png", width = 24, height = 20, units = "cm")
-  
