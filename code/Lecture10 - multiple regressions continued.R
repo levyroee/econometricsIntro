@@ -30,17 +30,21 @@ Airbnb$dist = mapply(function(x,y) pointDistance(p1 = downtownLondon, p2 = c(as.
                                                  Airbnb$loc1, Airbnb$loc2)/1000
 
 # Run the regressions
-naive1 <- lm(price~dist, data=Airbnb)
 
+oneVar <- lm(price~dist, data=Airbnb)
+
+multi <- lm(price~sqMt + dist + price, data=Airbnb)
 
 partial1 <- lm(dist~sqMt, data=Airbnb)
 Airbnb <- Airbnb %>% mutate(residDist = partial1$residuals)
 partial2 <- lm(price~residDist, data=Airbnb)
 
-multi <- lm(price~sqMt + dist + price, data=Airbnb)
+
+
+
 
 # Display the regressions
-stargazer(naive1, partial1, partial2, multi, type="text", omit.stat = "F")
+stargazer(oneVar, multi, partial1, partial2, type="text", omit.stat = "F")
 
 dataPlot = rbind(Airbnb %>% dplyr::select(x=dist, price) %>% mutate(type = "x = Original Distance"),
                  Airbnb %>% dplyr::select(x=residDist, price) %>% mutate(type = "x = Residualized Distance"))

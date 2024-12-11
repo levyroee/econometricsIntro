@@ -32,7 +32,10 @@ meanX = mean(Airbnb$sqMt)
 
 Airbnb <- Airbnb %>% mutate(xMinusMeanXSq = (sqMt-meanX)^2)
 
-predictionSE = sigma(model) * sqrt(1 + 1/nrow(Airbnb) + 
+sigma = sqrt(sum(model$resid^2)/(model$df.residual))
+
+
+predictionSE =  sigma * sqrt(1 + 1/nrow(Airbnb) + 
                            (100-meanX)^2 / sum(Airbnb$xMinusMeanXSq) )
 
 
