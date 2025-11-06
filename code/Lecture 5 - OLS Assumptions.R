@@ -273,3 +273,20 @@ ggplot(heightsLong, aes(x = value, y=student, color = as.factor(threeGroups))) +
   theme_classic() + 
   stat_poly_eq(use_label(c("eq"))) +
   theme(legend.position = "none")
+
+
+
+# *************************************************************************
+#  Compare partent grandparent height  ----
+# *************************************************************************
+
+
+library(AER)
+install.packages("AER")
+data(package = "AER")
+data("Fatalities")
+Fatalities$fatal_per_10000 <- with(Fatalities, fatal/pop * 10000)
+
+
+fatal_tax_model = lm(data = Fatalities, fatal_per_10000 ~ beertax)
+summary(fatal_tax_model)
