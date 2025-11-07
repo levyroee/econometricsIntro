@@ -2,7 +2,7 @@ library(tidyverse)
 library(ggplot2)
 library(colorspace)
 library(ggpmisc)
-
+library(AER)
 rm(list=ls())
 
 set.seed(2024)
@@ -80,7 +80,7 @@ dataOmitted <- dataOmitted %>% mutate(
   parentCollege = ifelse(education + rnorm(n,0,5)<15, 0, 1),
   wage =  5000 + 100*education + 1000*parentCollege + rnorm(n, 0, 100),
   parentCollegeF = factor(parentCollege, levels = 0:1, 
-                          labels = c("Parent high school", "Parent college")))
+                          labels = c("High skill", "Low skill")))
 
 observedLine = lm(wage ~ education, data = dataOmitted)
 obsIntercept = observedLine$coefficients[["(Intercept)"]]
@@ -277,13 +277,10 @@ ggplot(heightsLong, aes(x = value, y=student, color = as.factor(threeGroups))) +
 
 
 # *************************************************************************
-#  Compare partent grandparent height  ----
+#  Simple regression ----
 # *************************************************************************
 
-
-library(AER)
-install.packages("AER")
-data(package = "AER")
+#data(package = "AER")
 data("Fatalities")
 Fatalities$fatal_per_10000 <- with(Fatalities, fatal/pop * 10000)
 
