@@ -80,11 +80,21 @@ dataOmitted <- dataOmitted %>% mutate(
   parentCollege = ifelse(education + rnorm(n,0,5)<15, 0, 1),
   wage =  5000 + 100*education + 1000*parentCollege + rnorm(n, 0, 100),
   parentCollegeF = factor(parentCollege, levels = 0:1, 
-                          labels = c("High skill", "Low skill")))
+                          labels = c("Low skill", "High skill")))
 
 observedLine = lm(wage ~ education, data = dataOmitted)
 obsIntercept = observedLine$coefficients[["(Intercept)"]]
 obsSlope = observedLine$coefficients[["education"]]
+
+sum(observedLine$residuals*dataOmitted$education)
+cov(observedLine$residuals, dataOmitted$education)
+View(as.data.frame(list(resid = observedLine$residuals, educ = dataOmitted$education, wage = dataOmitted$wage, predict = observedLine$fitted.values)))
+
+ggplot(dataOmitted, aes(x = education, y=wage)) +
+  geom_point(size = 3) + 
+  theme_classic(base_size = 18) 
+ggsave("output/lecture5-olsAssumptions/omittedAssumption10.png", width=12, height = 12, units = "cm")
+
 
 ggplot(dataOmitted, aes(x = education, y=wage)) +
   geom_point(size = 3) + 
@@ -100,7 +110,7 @@ ggplot(dataOmitted, aes(x = education, y=wage, color = parentCollegeF)) +
   theme_classic(base_size = 18) + 
   geom_smooth(method='lm', formula= y~x, se=FALSE) +
   theme(legend.title = element_blank(), legend.position = "bottom")
-ggsave("output/lecture5-olsAssumptions/omittedAssumption2.png", width=12, height = 12, units = "cm")
+ggsave("output/lecture5-olsAssumptions/omittedAssumption2.png", width=14, height = 16, units = "cm")
 
 
 
