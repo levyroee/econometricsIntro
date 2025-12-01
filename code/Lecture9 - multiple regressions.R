@@ -5,13 +5,13 @@ library(ggpmisc)
 
 NBA <- read.delim("data/2022-2023 NBA/2022-2023 NBA Player Stats - Regular.csv",
                           sep = ";")
-
+attributes(NBA$MP)
 # Create sq var
 NBA <- NBA %>% mutate(AgeSq = Age^2)
 
 # Run regressions
 model1 <- lm(formula = PTS ~ Age + AgeSq, data=NBA)
-model2 <- lm(formula = PTS ~ Age + AgeSq + G, data=NBA)
+model2 <- lm(formula = PTS ~ Age + AgeSq + MP, data=NBA)
 
 # Display regressions
 stargazer(model1, model2, type = "text")
