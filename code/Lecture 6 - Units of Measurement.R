@@ -45,8 +45,8 @@ predict(model, data.frame(heightCM=174))
 ### Standard error
 summary(lm(data = men, formula = monthlyIncome ~ heightCM))
 33/2.54
-215-33.196
-215+33.196
+215-33*1.96
+215+33*1.96
 
-85-13.196
-85+13.196
+85-13*1.96
+85+13*1.96
